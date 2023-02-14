@@ -1,8 +1,8 @@
 import axios from 'axios'
 import cache from '@/plugins/cache.js'
-
 import { message } from 'ant-design-vue'
 import { getToken } from '@/utils/token'
+
 const service = axios.create({
   baseURL: 'http://localhost:5206',
   timeout: 8000,
