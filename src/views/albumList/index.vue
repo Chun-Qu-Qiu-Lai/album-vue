@@ -173,7 +173,7 @@
           <p style="user-select: none;font-size: 15px;font-weight: 600;letter-spacing: 2px;">输出图片格式</p>
           <div style="display: flex;justify-content: space-around;width: 50%;">
             <label>.png <input type="radio" name="type" value="png" v-model="data.picOption.outputType"></label>
-            <!-- <label>.jpg <input type="radio" name="type" value="jpeg" v-model="data.picOption.outputType"></label> -->
+            <label>.jfif <input type="radio" name="type" value="jpeg" v-model="data.picOption.outputType"></label>
             <label>.webp <input type="radio" name="type" value="webp" v-model="data.picOption.outputType"></label>
           </div>
         </label>
@@ -513,7 +513,7 @@ export default defineComponent({
       picOption: {
         img: 'https://oss-zscyun.oss-cn-beijing.aliyuncs.com/8356083440779264/8356126918705152/835678258328371220230130.png', // 裁剪图片的地址 url 地址, base64, blob
         outputSize: 1, // 裁剪生成图片的质量
-        outputType: 'jpeg', // 裁剪生成图片的格式 jpeg, png, webp
+        outputType: 'png', // 裁剪生成图片的格式 jpeg, png, webp
         info: true, // 裁剪框的大小信息
         canScale: false, // 图片是否允许滚轮缩放
         autoCrop: true, // 是否默认生成截图框

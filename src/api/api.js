@@ -193,7 +193,7 @@ export function getUploadOperation () {
 export function deletePictures (idList) {
   return request({
     url: `oss/removeFiles/${idList}`,
-    method: 'get',
+    method: 'post',
     headers: {
       isToken: true
     }

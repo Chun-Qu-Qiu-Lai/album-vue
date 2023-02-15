@@ -4,7 +4,7 @@ import { message } from 'ant-design-vue'
 import { getToken } from '@/utils/token'
 
 const service = axios.create({
-  baseURL: 'http://localhost:5206',
+  baseURL: 'https://www.zscyun.com' + '/ossapi',
   timeout: 8000,
   headers: {
     'Content-Type': 'application/json;charset=utf-8'
