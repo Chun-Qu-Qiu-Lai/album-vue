@@ -120,11 +120,11 @@ export default defineComponent({
       if (res.code === 200) {
         message.success('登录成功')
         setToken(res.data)
-      } else {
-        message.error('登录失败')
         router.push({
           path: '/home'
         })
+      } else {
+        message.error('登录失败')
       }
     }
     return {
@@ -171,7 +171,7 @@ export default defineComponent({
   letter-spacing: 1px;
   width: 200px;
   background-image: url("@/assets/images/psw.png");
-  background-size: 25px;
+  background-size: 30px;
   background-repeat: no-repeat;
   background-position: 10px;
   padding-left: 40px;
@@ -363,6 +363,8 @@ $blue: #f9cbe5;
 
 // 按钮
 .btn-5 {
+  letter-spacing: 0.5rem;
+  font-weight: 700;
   width: 130px;
   height: 40px;
   padding: 0;

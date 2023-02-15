@@ -16,6 +16,7 @@ export function login (username, password) {
     data: data
   })
 }
+
 // 获取目录列表
 export function getCatalogues () {
   return request({
@@ -26,13 +27,14 @@ export function getCatalogues () {
     }
   })
 }
-// 获取图片信息
+
+// 获取图片列表信息
 export function getPicTable (catalogueId) {
   const data = {
     catalogueId
   }
   return request({
-    url: 'oss/admin/getPicTables',
+    url: '/oss/admin/getPicTables',
     method: 'post',
     headers: {
       isToken: false,
@@ -41,13 +43,14 @@ export function getPicTable (catalogueId) {
     data: data
   })
 }
+
 // 创建目录
 export function addAlbum (catalogueName) {
   const data = {
     catalogueName
   }
   return request({
-    url: 'catalogue/createCatalogue',
+    url: '/catalogue/createCatalogue',
     method: 'post',
     headers: {
       isToken: true,
@@ -56,6 +59,7 @@ export function addAlbum (catalogueName) {
     data: data
   })
 }
+
 // 图片签名信息
 export function getSignature (catalogueId) {
   const data = {
@@ -71,6 +75,7 @@ export function getSignature (catalogueId) {
     data: data
   })
 }
+
 // 删除图片
 export function deletePicture (filePath) {
   const data = {
@@ -86,6 +91,7 @@ export function deletePicture (filePath) {
     data: data
   })
 }
+
 // 修改相册名称
 export function updateAlbumName (newAlbumName, catalogueId) {
   const data = {
@@ -102,6 +108,7 @@ export function updateAlbumName (newAlbumName, catalogueId) {
     data: data
   })
 }
+
 // 修改密码
 export function updatePsw (password, checkPassword) {
   const data = {
@@ -118,6 +125,7 @@ export function updatePsw (password, checkPassword) {
     data: data
   })
 }
+
 // 获取用户信息
 export function getUserInfo () {
   return request({
@@ -129,12 +137,13 @@ export function getUserInfo () {
   })
 }
 
+// 删除目录
 export function deleteCatalogue (catalogueId) {
   const data = {
     catalogueId
   }
   return request({
-    url: 'catalogue/admin/removeCatalogue',
+    url: '/catalogue/admin/removeCatalogue',
     method: 'post',
     headers: {
       isToken: true,
@@ -144,28 +153,32 @@ export function deleteCatalogue (catalogueId) {
   })
 }
 
+// 删除图片
 export function editHighHandle (pictureHandleForm) {
   return request({
-    url: 'oss/editFile',
+    url: '/oss/editFile',
     method: 'post',
     data: pictureHandleForm
   })
 }
 
+// 下载照片
 export function downloadFile (fileId) {
   const data = {
     fileId
   }
   return request({
-    url: 'oss/download',
+    url: '/oss/download',
     method: 'post',
     headers: {
-      isToken: true
+      isToken: true,
+      'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8;'
     },
     data: data
   })
 }
 
+// 获取上传日志
 export function getUploadOperation () {
   return request({
     url: 'operation/admin/uploadOperation',
@@ -175,6 +188,8 @@ export function getUploadOperation () {
     }
   })
 }
+
+// 删除照片
 export function deletePictures (idList) {
   return request({
     url: `oss/removeFiles/${idList}`,
@@ -184,6 +199,8 @@ export function deletePictures (idList) {
     }
   })
 }
+
+// 获取下载日志
 export function getDownloadOperation () {
   return request({
     url: 'operation/admin/downloadOperation',

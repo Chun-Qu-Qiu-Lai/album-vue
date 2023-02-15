@@ -2,7 +2,7 @@
   <div class="echarts-box">
     <div id="curveEcharts" :style="{ width: '100%', height: '300px' }"></div>
     <div style="display: flex;justify-content: space-around;">
-      <div id="circularEcharts" :style="{ width: '40%', height: '300px',  transform: 'scale(0.9)' }"></div>
+      <div id="circularEcharts" :style="{ width: '40%', height: '300px', transform: 'scale(0.9)' }"></div>
       <div id="albumEcharts" :style="{ width: '40%', height: '300px' }"></div>
     </div>
   </div>
@@ -83,6 +83,7 @@ export default defineComponent({
         message.error('系统出错')
       }
       const { data: res2 } = await getUploadOperation()
+      console.log(res2)
       if (res2.code === 200) {
         data.curveData.curveUploadData = res2.data
       } else {

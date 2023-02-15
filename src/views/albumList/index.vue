@@ -173,7 +173,7 @@
           <p style="user-select: none;font-size: 15px;font-weight: 600;letter-spacing: 2px;">输出图片格式</p>
           <div style="display: flex;justify-content: space-around;width: 50%;">
             <label>.png <input type="radio" name="type" value="png" v-model="data.picOption.outputType"></label>
-            <label>.jpg <input type="radio" name="type" value="jpeg" v-model="data.picOption.outputType"></label>
+            <!-- <label>.jpg <input type="radio" name="type" value="jpeg" v-model="data.picOption.outputType"></label> -->
             <label>.webp <input type="radio" name="type" value="webp" v-model="data.picOption.outputType"></label>
           </div>
         </label>
