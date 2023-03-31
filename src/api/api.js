@@ -50,7 +50,7 @@ export function addAlbum (catalogueName) {
     catalogueName
   }
   return request({
-    url: '/catalogue/createCatalogue',
+    url: '/catalogue/addCatalogue',
     method: 'post',
     headers: {
       isToken: true,
@@ -77,15 +77,16 @@ export function getSignature (catalogueId) {
 }
 
 // 删除图片
-export function deletePicture (filePath) {
+export function deletePicture (filePath, fileId) {
   const data = {
-    filePath
+    filePath,
+    fileId
   }
   return request({
-    url: '/oss/deleteFile',
+    url: '/oss/removeFile',
     method: 'post',
     headers: {
-      isToken: false,
+      isToken: true,
       'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8;'
     },
     data: data
@@ -99,7 +100,7 @@ export function updateAlbumName (newAlbumName, catalogueId) {
     catalogueId
   }
   return request({
-    url: '/catalogue/updateAlbumName',
+    url: '/catalogue/admin/editCatalogueName',
     method: 'post',
     headers: {
       isToken: false,
@@ -153,7 +154,7 @@ export function deleteCatalogue (catalogueId) {
   })
 }
 
-// 删除图片
+// 处理图片
 export function editHighHandle (pictureHandleForm) {
   return request({
     url: '/oss/editFile',
@@ -189,7 +190,7 @@ export function getUploadOperation () {
   })
 }
 
-// 删除照片
+// 批量删除照片
 export function deletePictures (idList) {
   return request({
     url: `oss/removeFiles/${idList}`,
@@ -204,6 +205,60 @@ export function deletePictures (idList) {
 export function getDownloadOperation () {
   return request({
     url: 'operation/admin/downloadOperation',
+    method: 'get',
+    headers: {
+      isToken: true
+    }
+  })
+}
+
+// 获取所有图片
+export function getAllFiles () {
+  return request({
+    url: 'oss/admin/getFileList',
+    method: 'get',
+    headers: {
+      isToken: true
+    }
+  })
+}
+
+// 创建token
+export function addToken (tokenName) {
+  const data = {
+    tokenName
+  }
+  return request({
+    url: 'oss/admin/addToken',
+    method: 'post',
+    headers: {
+      isToken: true,
+      'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8;'
+    },
+    data: data
+  })
+}
+
+// 删除token
+export function deleteToken (tokenId) {
+  const data = {
+    tokenId
+  }
+  return request({
+    url: 'oss/admin/removeToken',
+    method: 'post',
+    headers: {
+      isToken: true,
+      'Content-Type': 'application/x-www-form-urlencoded;charset:utf-8;'
+    },
+    data: data
+  })
+}
+
+// 查询token
+export function getTokens () {
+  return request({
+    url: 'oss/admin/getTokens',
     method: 'get',
     headers: {
       isToken: true

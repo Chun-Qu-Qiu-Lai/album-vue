@@ -67,15 +67,15 @@
     cancel-text="取消">
     <a-form>
       <a-form-item label="相册名称" name="albumName">
-        <a-input v-model:value="data.albumName">
+        <a-input v-model:value="data.albumName" style="border-radius: 1rem;">
         </a-input>
       </a-form-item>
     </a-form>
   </a-modal>
   <!-- 上传图片进度条 -->
   <a-modal :destroyOnClose="true" :centered="true" width="80px" :visible="data.progressModelVisible"
-    :bodyStyle="{ 'background-color': 'rgba(0,0,0,0.47)', padding: '0px', display: 'flex', 'align-items': 'center', 'text-align': 'center' }"
-    :footer="null" :closable="false" :maskClosable="false">
+    :bodyStyle="{ padding: '0px', display: 'flex', 'align-items': 'center', 'text-align': 'center' }" :footer="null"
+    :closable="false" :maskClosable="false">
     <a-progress type="circle" :percent="data.uploadPercent" :width="80" />
   </a-modal>
   <!-- 修改相册名称 -->
@@ -83,7 +83,7 @@
     :closable="false" ok-text="修改" cancel-text="取消">
     <a-form>
       <a-form-item label="新相册名称" name="newAlbumName">
-        <a-input v-model:value="data.newAlbumName">
+        <a-input v-model:value="data.newAlbumName" style="border-radius: 1rem;">
         </a-input>
       </a-form-item>
     </a-form>
@@ -189,62 +189,62 @@
       <input type="file" id="uploads" style="position:absolute; clip:rect(0 0 0 0);"
         accept="image/png, image/jpeg, image/gif, image/jpg" @change="uploadImg($event, 1)">
       <div @click="startCrop" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;" v-if="!data.crap">
+                text-align: center;justify-content: space-around;align-items: center;" v-if="!data.crap">
         <img src="@/assets/images/editPic/1.png" alt="" style="width: 30px;">
         <div>十字光标</div>
       </div>
       <div @click="stopCrop" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;" v-else>
+                text-align: center;justify-content: space-around;align-items: center;" v-else>
         <img src="@/assets/images/editPic/1.png" alt="" style="width: 30px;">
         <div>移动光标</div>
       </div>
       <div @click="clearCrop" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/2.png" alt="" style="width: 30px;">
         <div>清空</div>
       </div>
       <div @click="refreshCrop" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/3.png" alt="" style="width: 30px;">
         <div>刷新</div>
       </div>
       <div @click="changeScale(1)" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/4.png" alt="" style="width: 30px;">
         <div>放大</div>
       </div>
       <div @click="changeScale(-1)" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/5.png" alt="" style="width: 30px;">
         <div>缩小</div>
       </div>
       <div @click="rotateLeft" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/6.png" alt="" style="width: 30px;">
         <div>左旋转</div>
       </div>
       <div @click="rotateRight" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/7.png" alt="" style="width: 30px;">
         <div>右旋转</div>
       </div>
       <div @click="finish('base64')" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/8.png" alt="" style="width: 30px;">
         <div>预览(base64)</div>
       </div>
       <div @click="finish('blob')" style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/8.png" alt="" style="width: 30px;">
         <div>预览(blob)</div>
       </div>
       <div style="display: flex;flex-direction: column;
-        text-align: center;justify-content:space-around;align-items: center;">
+                text-align: center;justify-content:space-around;align-items: center;">
         <img src="@/assets/images/editPic/9.png" alt="" style="width: 30px;">
         <div><a @click="down('base64')">下载(base64)</a></div>
       </div>
       <div style="display: flex;flex-direction: column;
-        text-align: center;justify-content: space-around;align-items: center;">
+                text-align: center;justify-content: space-around;align-items: center;">
         <img src="@/assets/images/editPic/9.png" alt="" style="width: 30px;">
         <div><a @click="down('blob')">下载(blob)</a></div>
       </div>
@@ -287,8 +287,8 @@
             <a-switch v-model:checked="data.highHandleForm.blurVisible" />
           </a-form-item>
           <a-form-item label="模糊半径" name="username">
-            <a-slider :disabled="!data.highHandleForm.blurVisible" v-model:value="data.highHandleForm.blurRadius"
-              :min="1" :max="50" />
+            <a-slider :disabled="!data.highHandleForm.blurVisible" v-model:value="data.highHandleForm.blurRadius" :min="1"
+              :max="50" />
           </a-form-item>
           <a-form-item label="模糊标准差" name="username">
             <a-slider :disabled="!data.highHandleForm.blurVisible" v-model:value="data.highHandleForm.blurStandard"
@@ -330,8 +330,8 @@
               <a-switch v-model:checked="data.highHandleForm.shadowVisible" />
             </a-form-item>
             <a-form-item label="阴影透明度" name="username">
-              <a-slider :disabled="!data.highHandleForm.shadowVisible" v-model:value="data.highHandleForm.shadow"
-                :min="0" :max="100" />
+              <a-slider :disabled="!data.highHandleForm.shadowVisible" v-model:value="data.highHandleForm.shadow" :min="0"
+                :max="100" />
             </a-form-item>
             <a-form-item label="水印透明度" name="username">
               <a-slider v-model:value="data.highHandleForm.opacity" :min="0" :max="100" />
@@ -385,7 +385,7 @@ const columns = [{
   key: 'name',
   align: 'center'
 }, {
-  title: '照片数量',
+  title: '图片数量',
   dataIndex: 'count',
   key: 'count',
   align: 'center'

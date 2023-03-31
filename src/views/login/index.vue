@@ -9,10 +9,10 @@
         align-items: center;
         width: 400px
       ">
-          <div class="item">
+          <!-- <div class="item">
             <div><button @click="showLoginForm()" class="spin circle">登录</button></div>
             <div style="cursor: pointer;" @click="changeTheme()">Theme</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <p></p>

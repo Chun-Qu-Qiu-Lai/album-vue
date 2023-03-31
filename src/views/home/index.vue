@@ -10,7 +10,7 @@
 
 <script>
 import * as echarts from 'echarts'
-import { defineComponent, onMounted, onUnmounted, reactive } from 'vue'
+import { defineComponent, onMounted, reactive } from 'vue'
 import { getCatalogues, getUserInfo, getDownloadOperation, getUploadOperation } from '@/api/api'
 import { message } from 'ant-design-vue'
 export default defineComponent({
@@ -20,27 +20,23 @@ export default defineComponent({
     const data = reactive({
       ablbumInfo: [],
       uploadAndDowloadInfo: [],
-      curveData: {
-        curveDownloadData: {
-          downloadValue: [],
-          downloadTime: []
-        },
-        curveUploadData: {
-          uploadValue: [],
-          uploadTime: []
-        }
-      }
+      downloadValue: [],
+      downloadTime: [],
+      uploadValue: [],
+      uploadTime: []
+
     })
+
     onMounted(function () {
+      getCurveData()
+      getCurveDataK()
       getAblbumTable()
       getUploadAndDowloadNumber()
-      getCurveData()
-      initChart()
+      setTimeout(() => {
+        initChart()
+      }, 500)
     })
 
-    onUnmounted(() => {
-
-    })
     const getAblbumTable = async () => {
       const s = []
       const { data: res } = await getCatalogues()
@@ -53,7 +49,6 @@ export default defineComponent({
         }
         data.ablbumInfo = s
       }
-      initChart()
     }
     const getUploadAndDowloadNumber = async () => {
       const s = []
@@ -72,24 +67,25 @@ export default defineComponent({
         }
         data.uploadAndDowloadInfo = s
       }
-      initChart()
     }
 
     const getCurveData = async () => {
-      const { data: res1 } = await getDownloadOperation()
-      if (res1.code === 200) {
-        data.curveData.curveDownloadData = res1.data
+      const { data: res } = await getUploadOperation()
+      if (res.code === 200) {
+        data.uploadTime = res.data.uploadTime
+        data.uploadValue = res.data.uploadValue
       } else {
         message.error('系统出错')
       }
-      const { data: res2 } = await getUploadOperation()
-      console.log(res2)
-      if (res2.code === 200) {
-        data.curveData.curveUploadData = res2.data
+    }
+    const getCurveDataK = async () => {
+      const { data: res } = await getDownloadOperation()
+      if (res.code === 200) {
+        data.downloadValue = res.data.downloadValue
+        data.downloadTime = res.data.downloadTime
       } else {
         message.error('系统出错')
       }
-      initChart()
     }
 
     // 初始化图表
@@ -111,7 +107,7 @@ export default defineComponent({
           axisTick: {
             alignWithLabel: true
           },
-          data: data.curveData.curveDownloadData.downloadTime
+          data: data.downloadTime
         },
         yAxis: {
           name: '数量',
@@ -124,16 +120,32 @@ export default defineComponent({
           {
             name: '上传总数',
             type: 'line',
-            stack: 'x',
-            data: data.curveData.curveUploadData.uploadValue,
-            areaStyle: {}
+            stack: '上传总数',
+            data: data.uploadValue,
+            areaStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: 'red' },
+                  { offset: 0.5, color: '#f8e8e5' },
+                  { offset: 1, color: '#f8e8e5' }
+                ])
+              }
+            }
           },
           {
             name: '下载总数',
             type: 'line',
-            stack: 'x',
-            data: data.curveData.curveDownloadData.downloadValue,
-            areaStyle: {}
+            stack: '下载总数',
+            data: data.downloadValue,
+            areaStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                  { offset: 0, color: 'red' },
+                  { offset: 0.5, color: '#f8e8e5' },
+                  { offset: 1, color: '#f8e8e5' }
+                ])
+              }
+            }
           }
         ]
       })
@@ -147,6 +159,7 @@ export default defineComponent({
         tooltip: {
           igger: 'item', formatter: '{a} <br/>{b} : {c} ({d}%)'
         },
+        color: ['#ff8d37', '#5c77fc'],
         series: [
           {
             type: 'pie',
@@ -166,6 +179,7 @@ export default defineComponent({
         tooltip: {
           formatter: '{b} : {c} ({d}%)'
         },
+        color: ['#ff8d37', '#5c77fc'],
         series: [
           {
             type: 'pie',
@@ -196,6 +210,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

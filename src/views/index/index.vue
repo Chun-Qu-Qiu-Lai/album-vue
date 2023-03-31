@@ -11,16 +11,23 @@
       <a-menu v-model:selectedKeys="data.selectedKeys" mode="inline" :open-keys="data.openKeys"
         @openChange="onOpenChange">
         <a-menu-item v-for="item in noChildren" :key="item.lable" @click="clickMenu(item.path)">
-          <template v-if="`${item.lable}==='全局信息'`" #icon>
+          <template v-if="`${item.lable}==='仪表盘'`" #icon>
             <pie-chart-two-tone />
           </template>
           <span>{{ item.lable }}</span>
         </a-menu-item>
         <a-sub-menu v-for="item in hasChildren" :key="item.lable">
-          <template v-if="`${item.lable}` === '文件管理'" #icon>
+          <template v-if="`${item.lable}` === '图床管理'" #icon>
             <folder-open-two-tone />
           </template>
-          <template v-else-if="`${item.lable}`==='用户管理'" #icon>
+          <template v-else-if="`${item.lable}` === '我的图库'" #icon>
+            <tags-two-tone />
+          </template>
+          <template v-else-if="`${item.lable}` === '相册列表'" #icon>
+            <tags-two-tone />
+          </template>
+
+          <template v-else-if="`${item.lable}` === '用户管理'" #icon>
             <tags-two-tone />
           </template>
           <template #title>{{ item.lable }}</template>
@@ -40,16 +47,21 @@
       </div>
     </a-layout-sider>
     <a-layout :style="{ marginLeft: store.state.collapsed ? '80px' : '200px', transition: '0.3s' }">
-      <a-layout-header :style="{ background: 'rgba(62, 59, 67,0.1)', padding: '8px 30px' }">
-        <div style="display: flex;justify-content: space-between;">
+      <a-layout-header :style="{ background: 'rgba(255,255,255,0.1)', padding: '8px 10px 8px 10px' }">
+        <div
+          style="display: flex;justify-content: space-between;width: 95%;background: rgba(62, 59, 67,0.1);padding: 3px 10px;border-radius: 5px;margin: 0 auto;">
           <div style="text-align: center;display: flex;line-height: 50px;">{{ data.username }}</div>
           <div @click="signout()" class="signout"
             style="height: 100%;line-height: 50px;padding: 0px 20px;color: #000000;background-color: #fff;border-radius: 4px;cursor: pointer;  transition: .3s;">
             退出</div>
         </div>
       </a-layout-header>
-      <a-layout-content :style="{ margin: '0 16px' }">
-        <router-view></router-view>
+      <a-layout-content :style="{ margin: '0 6px', padding: '20px' }">
+        <div
+          style="width: 95%;background-color: rgba(254, 227, 218,0.6);margin: 0 auto;border-radius: 10px;min-height: 85vh;padding: 1rem .5rem;">
+          <router-view></router-view>
+        </div>
+
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -75,21 +87,22 @@ export default defineComponent({
     const store = useStore()
     const router = useRouter()
     const menuList = [{
-      lable: '全局信息',
+      lable: '仪表盘',
       icon: <pie-chart-two-tone />,
       path: '/home'
     }, {
-      lable: '文件管理',
+      lable: '图床管理',
       icon: <folder-open-two-tone />,
       children: [{
+        lable: '我的图库',
+        path: '/albumAdmin/depot'
+      }, {
         lable: '相册列表',
         path: '/albumAdmin/albumList'
-      }
-        //   , {
-        //   lable: '图片上传',
-        //   path: '/albumAdmin/upload'
-        // }
-      ]
+      }, {
+        lable: '接口使用',
+        path: '/albumAdmin/apiuse'
+      }]
     }, {
       lable: '用户管理',
       icon: <tags-two-tone />,
@@ -168,6 +181,11 @@ export default defineComponent({
 })
 </script>
 <style scoped lang="scss">
+body,
+html {
+  background-color: #db0c0c;
+}
+
 #components-layout-demo-fixed-sider .logo {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);

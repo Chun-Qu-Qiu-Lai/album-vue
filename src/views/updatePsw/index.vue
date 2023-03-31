@@ -1,17 +1,23 @@
 <template>
-  <a-form autocomplete="off" name="basic" @finish="submitForm" :model="data.formState" :label-col="{ span: 18 }"
-    :wrapper-col="{ span: 10 }">
-    <a-form-item :rules="[{ required: true, message: '请输入新密码' }, { max: 10, message: '长度最大10位' }]" label="新密码"
-      name="password" :label-col="{ span: 10 }" :wrapper-col="{ offset: 0, span: 4 }">
-      <a-input v-model:value="data.formState.password">
-      </a-input>
-    </a-form-item>
-    <a-form-item :rules="[{ required: true, message: '请再次输入新密码' }, { max: 10, message: '长度最大10位' }]" label="再次输入"
-      name="checkPassword" :label-col="{ span: 10 }" :wrapper-col="{ offset: 0, span: 4 }">
-      <a-input v-model:value="data.formState.checkPassword">
-      </a-input></a-form-item>
-    <a-button type="primary" html-type="submit">修改</a-button>
-  </a-form>
+  <div
+    style="background-color: #f3f4f6;width: 50%;display: flex;align-items: center;margin: 0 auto;
+    border-radius: 0.5rem;flex-direction: column;padding: 20px 20px;box-shadow: 1px 2px 5px #727272;">
+    <a-form style="width: 100%;" autocomplete="off" name="basic" @finish="submitForm" :model="data.formState"
+      :label-col="{ span: 0 }" :wrapper-col="{ span: 24 }">
+      <a-form-item  :rules="[{ required: true, message: '请输入新密码' }, { max: 10, message: '长度最大10位' }]" label="新密码"
+        name="password" :label-col="{ span: 8 }" :wrapper-col="{ offset: 0, span: 10 }">
+        <a-input v-model:value="data.formState.password" style="border-radius: 1rem;">
+        </a-input>
+      </a-form-item>
+      <a-form-item  :rules="[{ required: true, message: '请再次输入新密码' }, { max: 10, message: '长度最大10位' }]" label="再次输入"
+        name="checkPassword" :label-col="{ span: 8 }" :wrapper-col="{ offset: 0, span: 10 }">
+        <a-input v-model:value="data.formState.checkPassword" style="border-radius: 1rem;">
+        </a-input></a-form-item>
+      <a-form-item :wrapper-col="{ offset: 9, span: 4 }">
+        <a-button style="display: flex;align-items: center;margin-left: 50%;border-radius: 0.3rem;" type="primary" html-type="submit">修改</a-button>
+      </a-form-item>
+    </a-form>
+  </div>
 </template>
 
 <script>
@@ -54,6 +60,4 @@ export default defineComponent({
   }
 })
 </script>
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
